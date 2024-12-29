@@ -6,6 +6,16 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { CircleDollarSign, ArrowUpRight, AlertTriangle, Clock, Calendar, X } from 'lucide-react';
 
+interface LoanData {
+  projectName: string;
+  loanAmount: string;
+  interestRate: string;
+  collateral: string;
+  maturityDate: string;
+  status: string;
+  riskLevel: string;
+}
+
 const BridgeLoanDashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeBridgeLoans, setActiveBridgeLoans] = useState([
@@ -29,7 +39,7 @@ const BridgeLoanDashboard = () => {
     }
   ]);
 
-  const [newLoan, setNewLoan] = useState({
+  const [newLoan, setNewLoan] = useState<LoanData>({
     projectName: "",
     loanAmount: "",
     interestRate: "",
@@ -41,8 +51,8 @@ const BridgeLoanDashboard = () => {
 
   const metrics = {
     totalLoansActive: activeBridgeLoans.length,
-    totalValueDeployed: activeBridgeLoans.reduce((sum, loan) => sum + loan.loanAmount, 0),
-    averageInterestRate: activeBridgeLoans.reduce((sum, loan) => sum + loan.interestRate, 0) / activeBridgeLoans.length,
+    totalValueDeployed: activeBridgeLoans.reduce((sum, loan) => sum + parseFloat(loan.loanAmount), 0),
+    averageInterestRate: activeBridgeLoans.reduce((sum, loan) => sum + parseFloat(loan.interestRate), 0) / activeBridgeLoans.length,
     upcomingMaturities: activeBridgeLoans.filter(loan => {
       const maturity = new Date(loan.maturityDate);
       const now = new Date();
@@ -56,7 +66,7 @@ const BridgeLoanDashboard = () => {
     let processedValue = value;
     
     if (name === 'loanAmount') {
-      processedValue = Number(value.replace(/[^0-9]/g, ''));
+      loanAmount: value.replace(/[^0-9]/g, '');
     } else if (name === 'interestRate') {
       processedValue = value.replace(/[^\d.]/g, '');
     }
