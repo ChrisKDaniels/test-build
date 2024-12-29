@@ -3,9 +3,10 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 
+// Define the props for the Tabs component
 type TabsProps = React.HTMLAttributes<HTMLDivElement> & {
   children: React.ReactNode;
-  defaultValue: string;
+  defaultValue: string; // Required defaultValue for tabs
 };
 
 const TabsContext = React.createContext<{
@@ -65,7 +66,7 @@ export const TabsContent = ({
 }: {
   value: string;
   children: React.ReactNode;
-  className?: string; // Allow optional className
+  className?: string; // Allow className for styling
 }) => {
   const context = React.useContext(TabsContext);
 
