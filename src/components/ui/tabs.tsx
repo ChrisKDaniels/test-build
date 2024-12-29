@@ -1,24 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import clsx from "clsx"; // Safely combine class names
+import clsx from "clsx";
 
-// Tabs Context
+type TabsProps = {
+  children: React.ReactNode;
+  defaultValue: string;
+  className?: string; // Allow className as an optional prop
+};
+
 const TabsContext = React.createContext<{
   activeTab: string;
   setActiveTab: (tab: string) => void;
 } | null>(null);
 
-// Tabs Component
-export const Tabs = ({
-  children,
-  defaultValue,
-  className,
-}: {
-  children: React.ReactNode;
-  defaultValue: string;
-  className?: string; // Add className as an optional prop
-}) => {
+export const Tabs = ({ children, defaultValue, className }: TabsProps) => {
   const [activeTab, setActiveTab] = useState(defaultValue);
 
   return (
@@ -28,12 +24,10 @@ export const Tabs = ({
   );
 };
 
-// TabsList Component
 export const TabsList = ({ children }: { children: React.ReactNode }) => (
   <div className="flex space-x-2 border-b border-gray-300">{children}</div>
 );
 
-// TabsTrigger Component
 export const TabsTrigger = ({
   value,
   children,
@@ -63,7 +57,6 @@ export const TabsTrigger = ({
   );
 };
 
-// TabsContent Component
 export const TabsContent = ({
   value,
   children,
