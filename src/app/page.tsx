@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { CircleDollarSign, ArrowUpRight, AlertTriangle, Clock, Calendar } from "lucide-react";
+import { CircleDollarSign, AlertTriangle } from "lucide-react"; // Only keep used imports
 
 const BridgeLoanDashboard = () => {
   const initialLoans = [
@@ -28,18 +28,13 @@ const BridgeLoanDashboard = () => {
     },
   ];
 
-  const [loans, setLoans] = useState(initialLoans);
+  const [loans] = useState(initialLoans); // Remove `setLoans` if it's not being used
 
   return (
     <div className="p-6 space-y-6 bg-gray-50">
       {/* Header Section */}
       <div className="flex justify-between items-center">
         <h1 className="text-2xl font-bold text-gray-900">Bridge Loan Portfolio</h1>
-        <div className="flex gap-4">
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            New Loan
-          </button>
-        </div>
       </div>
 
       {/* Metrics */}
@@ -59,7 +54,6 @@ const BridgeLoanDashboard = () => {
       <Tabs defaultValue="active" className="w-full">
         <TabsList>
           <TabsTrigger value="active">Active Loans</TabsTrigger>
-          <TabsTrigger value="pending">Pending</TabsTrigger>
         </TabsList>
 
         <TabsContent value="active">
