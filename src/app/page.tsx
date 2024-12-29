@@ -8,7 +8,7 @@ const BridgeLoanDashboard = () => {
   // Sample data
   const activeBridgeLoans = [
     {
-      projectName: "Summer Storm",
+      projectName: "Winter Storm",
       loanAmount: 2500000,
       interestRate: 8.5,
       collateral: "Tax Credits",
