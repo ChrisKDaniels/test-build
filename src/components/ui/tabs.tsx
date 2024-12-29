@@ -1,7 +1,7 @@
-"use client";
+"use client"; // Ensure this is at the top
 
-import React, { useState } from 'react';
-import clsx from 'clsx'; // For combining class names
+import React, { useState } from "react";
+import clsx from "clsx"; // For safely combining class names
 
 // Tabs Context
 const TabsContext = React.createContext<{
@@ -17,7 +17,7 @@ export const Tabs = ({
 }: {
   children: React.ReactNode;
   defaultValue: string;
-  className?: string;
+  className?: string; // Allow className as an optional prop
 }) => {
   const [activeTab, setActiveTab] = useState(defaultValue);
 
@@ -44,7 +44,7 @@ export const TabsTrigger = ({
   const context = React.useContext(TabsContext);
 
   if (!context) {
-    throw new Error('TabsTrigger must be used within a Tabs component');
+    throw new Error("TabsTrigger must be used within a Tabs component");
   }
 
   const { activeTab, setActiveTab } = context;
@@ -54,8 +54,8 @@ export const TabsTrigger = ({
       onClick={() => setActiveTab(value)}
       className={`px-4 py-2 ${
         activeTab === value
-          ? 'border-b-2 border-blue-600 text-blue-600'
-          : 'text-gray-500'
+          ? "border-b-2 border-blue-600 text-blue-600"
+          : "text-gray-500"
       }`}
     >
       {children}
@@ -74,7 +74,7 @@ export const TabsContent = ({
   const context = React.useContext(TabsContext);
 
   if (!context) {
-    throw new Error('TabsContent must be used within a Tabs component');
+    throw new Error("TabsContent must be used within a Tabs component");
   }
 
   const { activeTab } = context;
