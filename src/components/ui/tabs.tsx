@@ -3,16 +3,19 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 
+// Define the props for Tabs
 type TabsProps = React.HTMLAttributes<HTMLDivElement> & {
   children: React.ReactNode;
   defaultValue: string;
 };
 
+// Context for Tabs
 const TabsContext = React.createContext<{
   activeTab: string;
   setActiveTab: (tab: string) => void;
 } | null>(null);
 
+// Tabs Component
 export const Tabs = ({ children, defaultValue, className, ...rest }: TabsProps) => {
   const [activeTab, setActiveTab] = useState(defaultValue);
 
@@ -25,10 +28,12 @@ export const Tabs = ({ children, defaultValue, className, ...rest }: TabsProps) 
   );
 };
 
+// TabsList Component
 export const TabsList = ({ children }: { children: React.ReactNode }) => (
   <div className="flex space-x-2 border-b border-gray-300">{children}</div>
 );
 
+// TabsTrigger Component
 export const TabsTrigger = ({
   value,
   children,
@@ -58,6 +63,7 @@ export const TabsTrigger = ({
   );
 };
 
+// TabsContent Component
 export const TabsContent = ({
   value,
   children,
