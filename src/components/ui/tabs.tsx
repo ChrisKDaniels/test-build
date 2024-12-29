@@ -1,7 +1,7 @@
-"use client"; // Ensure this is at the top
+"use client";
 
 import React, { useState } from "react";
-import clsx from "clsx"; // For safely combining class names
+import clsx from "clsx"; // Safely combine class names
 
 // Tabs Context
 const TabsContext = React.createContext<{
@@ -17,7 +17,7 @@ export const Tabs = ({
 }: {
   children: React.ReactNode;
   defaultValue: string;
-  className?: string; // Allow className as an optional prop
+  className?: string; // Add className as an optional prop
 }) => {
   const [activeTab, setActiveTab] = useState(defaultValue);
 
