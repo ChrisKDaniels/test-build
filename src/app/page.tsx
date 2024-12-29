@@ -46,7 +46,7 @@ const BridgeLoanDashboard = () => {
     upcomingMaturities: activeBridgeLoans.filter(loan => {
       const maturity = new Date(loan.maturityDate);
       const now = new Date();
-      const daysUntilMaturity = (maturity - now) / (1000 * 60 * 60 * 24);
+      const daysUntilMaturity = (maturity.getTime() - now.getTime()) / (1000 * 60 * 60 * 24);
       return daysUntilMaturity <= 30;
     }).length
   };
