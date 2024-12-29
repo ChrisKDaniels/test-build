@@ -1,6 +1,7 @@
-"use client"; // This ensures the file runs as a client component
+"use client";
 
 import React, { useState } from 'react';
+import clsx from 'clsx'; // For combining class names
 
 // Tabs Context
 const TabsContext = React.createContext<{
@@ -12,15 +13,17 @@ const TabsContext = React.createContext<{
 export const Tabs = ({
   children,
   defaultValue,
+  className,
 }: {
   children: React.ReactNode;
   defaultValue: string;
+  className?: string;
 }) => {
   const [activeTab, setActiveTab] = useState(defaultValue);
 
   return (
     <TabsContext.Provider value={{ activeTab, setActiveTab }}>
-      <div>{children}</div>
+      <div className={clsx(className)}>{children}</div>
     </TabsContext.Provider>
   );
 };
