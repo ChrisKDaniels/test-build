@@ -3,10 +3,9 @@
 import React, { useState } from "react";
 import clsx from "clsx";
 
-type TabsProps = {
+type TabsProps = React.HTMLAttributes<HTMLDivElement> & {
   children: React.ReactNode;
   defaultValue: string;
-  className?: string; // Allow className as an optional prop
 };
 
 const TabsContext = React.createContext<{
@@ -14,12 +13,14 @@ const TabsContext = React.createContext<{
   setActiveTab: (tab: string) => void;
 } | null>(null);
 
-export const Tabs = ({ children, defaultValue, className }: TabsProps) => {
+export const Tabs = ({ children, defaultValue, className, ...rest }: TabsProps) => {
   const [activeTab, setActiveTab] = useState(defaultValue);
 
   return (
     <TabsContext.Provider value={{ activeTab, setActiveTab }}>
-      <div className={clsx(className)}>{children}</div>
+      <div className={clsx(className)} {...rest}>
+        {children}
+      </div>
     </TabsContext.Provider>
   );
 };
@@ -60,9 +61,11 @@ export const TabsTrigger = ({
 export const TabsContent = ({
   value,
   children,
+  className,
 }: {
   value: string;
   children: React.ReactNode;
+  className?: string; // Allow optional className
 }) => {
   const context = React.useContext(TabsContext);
 
@@ -72,5 +75,5 @@ export const TabsContent = ({
 
   const { activeTab } = context;
 
-  return activeTab === value ? <div className="p-4">{children}</div> : null;
+  return activeTab === value ? <div className={clsx(className)}>{children}</div> : null;
 };
